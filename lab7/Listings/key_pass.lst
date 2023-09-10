@@ -1,0 +1,134 @@
+C51 COMPILER V9.60.7.0   KEY_PASS                                                          03/08/2023 18:08:00 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY_PASS
+OBJECT MODULE PLACED IN .\Objects\key_pass.obj
+COMPILER INVOKED BY: E:\Keil_v5\C51\BIN\C51.EXE key_pass.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
+                    -key_pass.lst) TABS(2) OBJECT(.\Objects\key_pass.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          #include "lcd.h"
+   3          code unsigned char msg1[] ="Enter Password:";
+   4          code unsigned char msg2[] ="15A8*D6#";
+   5          code unsigned char msg3[] ="Acess Denied";
+   6          code unsigned char msg4[] ="Acess Granted";
+   7          unsigned char pass[8];
+   8          unsigned char keypress;
+   9          unsigned int a;
+  10          unsigned int b;
+  11          unsigned int j;
+  12          unsigned int m;
+  13          unsigned int row;
+  14          unsigned int col;
+  15          int anyuneq;
+  16          int i;  
+  17          unsigned char keypad[4][4] = {'1','2','3','A','4','5','6',
+  18                                          'B','7','8','9','C',
+  19                                          '*','0','#','D'};
+  20          void main()
+  21          {
+  22   1        P3 = 0x0F;//moving 0 in all rows
+  23   1        lcd_init();
+  24   1        lcd_cmd(0x80);
+  25   1        lcd_write_string(msg1);
+  26   1        for(m = 0; m < 8; m++)
+  27   1        {
+  28   2          P3 = 0x0f;
+  29   2          while(1)
+  30   2          { 
+  31   3            //check if all columns are zero 1 st time
+  32   3            a = P3&0x0f;
+  33   3            if(a != 0x0f)
+  34   3            {
+  35   4              continue;//return if p3 is not 00001111
+  36   4            }
+  37   3            a = P3&0x0f;
+  38   3            while(a == 0x0f)
+  39   3            {
+  40   4              a = P3&0x0f;//continue;//return if p3 is not 00001111
+  41   4            }
+  42   3            msdelay(20);
+  43   3            a = P3&0x0f;//read all columns, if any key down then a not 15
+  44   3            if(a == 0x0f)
+  45   3            {
+  46   4              continue;//if no key down go back to top
+  47   4            }
+  48   3            b = P3|0xf0;
+  49   3            j = 1;
+  50   3            for(i = 0;i < 4;i++)
+  51   3            {
+  52   4              P3 = b - 8*(2*(j));//put p3 as 1110xxxx
+  53   4              P3 = P3|0x0f;
+  54   4              a = P3&0x0f;
+C51 COMPILER V9.60.7.0   KEY_PASS                                                          03/08/2023 18:08:00 PAGE 2   
+
+  55   4              j= j*2;
+  56   4              if(a != 0x0f)
+  57   4              {
+  58   5                row = i;
+  59   5                break;
+  60   5              }
+  61   4            }
+  62   3            j = 1;
+  63   3            for(i = 0;i< 4;i++)
+  64   3            {
+  65   4              if(a == 15 - j){
+  66   5              col = 3-i;
+  67   5              break;}
+  68   4              j = j*2;
+  69   4            }
+  70   3            keypress = keypad[row][col];
+  71   3            pass[m] = keypress;
+  72   3            lcd_cmd(0xc0);
+  73   3            msdelay(4);
+  74   3            lcd_write_string(pass);//write character entered
+  75   3            break;
+  76   3          }
+  77   2        }
+  78   1        anyuneq = 0;
+  79   1        for(m = 0; m<8; m++)
+  80   1        {
+  81   2          if(pass[m] != msg2[m])
+  82   2          {
+  83   3            lcd_cmd(0x01);
+  84   3            lcd_cmd(0x80);
+  85   3            msdelay(4);
+  86   3            lcd_write_string("Wrong Password");
+  87   3            lcd_cmd(0xc0);
+  88   3            msdelay(4);
+  89   3            lcd_write_string(msg3);
+  90   3            anyuneq = 1;
+  91   3            break;
+  92   3          }
+  93   2        }
+  94   1        if(anyuneq == 0)
+  95   1        {
+  96   2          lcd_cmd(0x01);
+  97   2          lcd_cmd(0x80);
+  98   2          msdelay(4);
+  99   2          lcd_write_string("Correct Password");
+ 100   2          lcd_cmd(0xc0);
+ 101   2          msdelay(4);
+ 102   2          lcd_write_string(msg4);
+ 103   2          while(1){}
+ 104   2        }
+ 105   1        while(1);
+ 106   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    593    ----
+   CONSTANT SIZE    =     84    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     41       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.60.7.0   KEY_PASS                                                          03/08/2023 18:08:00 PAGE 3   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

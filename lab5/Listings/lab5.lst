@@ -1,0 +1,146 @@
+A51 MACRO ASSEMBLER  LAB5                                                                 02/07/2023 14:32:43 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lab5.obj
+ASSEMBLER INVOKED BY: E:\Keil_v5\C51\BIN\A51.EXE lab5.ASM SET(SMALL) DEBUG PRINT(.\Listings\lab5.lst) OBJECT(.\Objects\l
+                      ab5.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 100H
+0100                   4     MAIN:
+                       5     
+                       6     
+0100 3132              7     CALL TAK_INP
+0102 80FE              8     HERE: SJMP HERE
+0130                   9     ORG 130H
+                      10     
+                      11     
+                      12     
+0130 740F             13         MOV A, #0FH
+                      14             
+0132                  15     TAK_INP:
+0132 E590             16             MOV A, P1
+0134 540F             17             ANL A, #0FH
+0136 F9               18         MOV R1, A
+                      19             
+                      20             
+0137                  21     FUNC:
+                      22         
+0137 E9               23             MOV A, R1
+0138 9401             24         SUBB A, #00000001b
+013A 6010             25             JZ loop_sa
+013C E9               26             MOV A,R1
+                      27             
+013D 9403             28             SUBB A, #00000011b
+013F 601E             29             JZ loop_re
+0141 E9               30             MOV A,R1
+                      31             
+0142 9407             32             SUBB A, #00000111b
+0144 602C             33             JZ loop_ga
+0146 E9               34             MOV A, R1
+                      35             
+                      36             
+0147 940F             37             SUBB A, #00001111b
+0149 603A             38             JZ loop_ma
+014B E9               39         MOV A, R1
+                      40             
+                      41     
+014C 120154           42          loop_sa: lcall delay_sa
+014F B287             43                    cpl p0.7
+0151 020132           44                    ljmp TAK_INP
+0154                  45                     delay_sa:
+0154 C000             46                             push 00h
+0156 7827             47                             mov r0, #39
+0158 3198             48                             h2: acall delay_50us
+015A D8FC             49                             djnz r0, h2
+015C D000             50                             pop 00h
+015E 22               51                             ret
+                      52                     
+015F 120167           53                     loop_re: lcall delay_re
+0162 B287             54                    cpl p0.7
+0164 020132           55                    ljmp TAK_INP
+                      56                             
+0167                  57                     delay_re:
+A51 MACRO ASSEMBLER  LAB5                                                                 02/07/2023 14:32:43 PAGE     2
+
+0167 C000             58                             push 00h
+0169 7823             59                             mov r0, #35
+016B 3198             60                             h3: acall delay_50us
+016D D8E9             61                             djnz r0, h2
+                      62                             
+016F D000             63                             pop 00h
+0171 22               64                             ret
+                      65                             
+                      66             
+0172 12017A           67            loop_ga: lcall delay_ga
+0175 B287             68                    cpl p0.7
+0177 020132           69                    ljmp TAK_INP     
+017A                  70                     delay_ga:
+017A C000             71                             push 00h
+017C 781F             72                             mov r0, #31
+017E 3198             73                             h4: acall delay_50us
+0180 D8D6             74                             djnz r0, h2
+0182 D000             75                             pop 00h
+0184 22               76                             ret
+                      77                     
+0185 12018D           78               loop_ma: lcall delay_ma
+0188 B287             79                             cpl p0.7
+018A 020132           80                             ljmp TAK_INP            
+018D                  81                     delay_ma:
+018D C000             82                             push 00h
+018F 781D             83                             mov r0, #29
+0191 3198             84                             h5: acall delay_50us
+0193 D8C3             85                             djnz r0, h2
+0195 D000             86                             pop 00h
+0197 22               87                             ret
+                      88                             
+                      89                             
+0198                  90                     delay_50us:
+0198 C000             91                     push 00h
+019A 782C             92                     mov r0, #44
+019C D8FE             93                     h1: djnz r0, h1
+019E D000             94                     pop 00h
+01A0 22               95             RET
+                      96                     
+                      97                     
+                      98             
+01A1 22               99     RET     
+                     100     END
+A51 MACRO ASSEMBLER  LAB5                                                                 02/07/2023 14:32:43 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY_50US . . . .  C ADDR   0198H   A   
+DELAY_GA . . . . .  C ADDR   017AH   A   
+DELAY_MA . . . . .  C ADDR   018DH   A   
+DELAY_RE . . . . .  C ADDR   0167H   A   
+DELAY_SA . . . . .  C ADDR   0154H   A   
+FUNC . . . . . . .  C ADDR   0137H   A   
+H1 . . . . . . . .  C ADDR   019CH   A   
+H2 . . . . . . . .  C ADDR   0158H   A   
+H3 . . . . . . . .  C ADDR   016BH   A   
+H4 . . . . . . . .  C ADDR   017EH   A   
+H5 . . . . . . . .  C ADDR   0191H   A   
+HERE . . . . . . .  C ADDR   0102H   A   
+LOOP_GA. . . . . .  C ADDR   0172H   A   
+LOOP_MA. . . . . .  C ADDR   0185H   A   
+LOOP_RE. . . . . .  C ADDR   015FH   A   
+LOOP_SA. . . . . .  C ADDR   014CH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TAK_INP. . . . . .  C ADDR   0132H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

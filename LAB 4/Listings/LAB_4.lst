@@ -1,0 +1,234 @@
+A51 MACRO ASSEMBLER  LAB_4                                                                01/31/2023 14:12:23 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\LAB_4.obj
+ASSEMBLER INVOKED BY: E:\Keil_v5\C51\BIN\A51.EXE LAB_4.ASM SET(SMALL) DEBUG PRINT(.\Listings\LAB_4.lst) OBJECT(.\Objects
+                      \LAB_4.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+0000                   2     ORG 0H
+0000 020100            3     LJMP MAIN
+0100                   4     ORG 100H
+0100                   5     MAIN:
+0100 120146            6     LCALL TAKE_INP
+0103 1201BB            7     LCALL QUANT_ENC
+0106 1201FC            8     LCALL LED_DISP
+0109 80FE              9     HERE: SJMP HERE
+0130                  10     ORG 130H
+                      11     
+0130                  12     DELAY10:
+0130 C000             13             push 00h
+0132 78C8             14             mov r0, #0C8h
+0134 5113             15     h3: acall delay_50ms
+0136 D8FC             16             djnz r0, h3
+0138 D000             17             pop 00h
+                      18     
+013A 22               19     RET
+                      20     
+013B                  21     DELAY5:
+013B C000             22             push 00h
+013D 7864             23             mov r0, #064h
+013F 5113             24     h4: acall delay_50ms
+0141 D8FC             25             djnz r0, h4
+0143 D000             26             pop 00h
+                      27     
+0145 22               28     RET
+                      29     
+0146                  30     TAKE_INP:
+0146 75901F           31     MOV P1, #1FH
+0149 3130             32     ACALL DELAY10
+014B E590             33     MOV A, P1
+014D C3               34     CLR C
+014E 9410             35     SUBB A, #10H
+0150 C4               36     SWAP A
+0151 FE               37     MOV R6, A
+                      38     
+0152 75902F           39     MOV P1, #2FH
+0155 3130             40     ACALL DELAY10
+0157 E590             41     MOV A, P1
+0159 C3               42     CLR C
+015A 9420             43     SUBB A, #20H
+015C 8EF0             44     MOV B, R6
+015E 25F0             45     ADD A, B 
+0160 F560             46     MOV 60H, A
+                      47     
+0162 75903F           48     MOV P1, #3FH
+0165 3130             49     ACALL DELAY10
+0167 E590             50     MOV A, P1
+0169 C3               51     CLR C
+016A 9430             52     SUBB A, #30H
+016C C4               53     SWAP A
+016D FE               54     MOV R6, A
+                      55     
+016E 75904F           56     MOV P1, #4FH
+0171 3130             57     ACALL DELAY10
+A51 MACRO ASSEMBLER  LAB_4                                                                01/31/2023 14:12:23 PAGE     2
+
+0173 E590             58     MOV A, P1
+0175 C3               59     CLR C
+0176 9440             60     SUBB A, #40H
+0178 8EF0             61     MOV B, R6
+017A 25F0             62     ADD A, B 
+017C F561             63     MOV 61H, A
+                      64     
+017E 75905F           65     MOV P1, #5FH
+0181 3130             66     ACALL DELAY10
+0183 E590             67     MOV A, P1
+0185 C3               68     CLR C
+0186 9450             69     SUBB A, #50H
+0188 C4               70     SWAP A
+0189 FE               71     MOV R6, A
+                      72     
+018A 75906F           73     MOV P1, #6FH
+018D 3130             74     ACALL DELAY10
+018F E590             75     MOV A, P1
+0191 C3               76     CLR C
+0192 9460             77     SUBB A, #60H
+0194 8EF0             78     MOV B, R6
+0196 25F0             79     ADD A, B 
+0198 F562             80     MOV 62H, A
+                      81     
+019A 75907F           82     MOV P1, #7FH
+019D 3130             83     ACALL DELAY10
+019F E590             84     MOV A, P1
+01A1 C3               85     CLR C
+01A2 9470             86     SUBB A, #70H
+01A4 C4               87     SWAP A
+01A5 FE               88     MOV R6, A
+                      89     
+01A6 75908F           90     MOV P1, #8FH
+01A9 3130             91     ACALL DELAY10
+01AB E590             92     MOV A, P1
+01AD C3               93     CLR C
+01AE 9480             94     SUBB A, #80H
+01B0 8EF0             95     MOV B, R6
+01B2 25F0             96     ADD A, B 
+01B4 F563             97     MOV 63H, A
+                      98     
+01B6 53900F           99     ANL P1, #0FH
+01B9 313B            100     ACALL DELAY5
+                     101     
+01BB                 102     QUANT_ENC:
+                     103     
+                     104     
+                     105     
+01BB 7873            106     MOV R0 , #73H
+01BD 7963            107     MOV R1 , #63H
+01BF 7A04            108     MOV R2 , #4H
+                     109     
+01C1                 110     COMPARE:
+01C1 87F0            111     MOV B , @R1
+01C3 740A            112     MOV A , #0AH
+01C5 95F0            113     SUBB A , B
+01C7 601E            114     JZ STORE15
+01C9 5015            115     JNC STORE5
+01CB C3              116     CLR C
+01CC 7414            117     MOV A , #14H
+01CE 95F0            118     SUBB A , B
+01D0 601C            119     JZ STORE25
+01D2 5013            120     JNC STORE15
+01D4 C3              121     CLR C
+01D5 741E            122     MOV A , #1EH
+01D7 95F0            123     SUBB A , B
+A51 MACRO ASSEMBLER  LAB_4                                                                01/31/2023 14:12:23 PAGE     3
+
+01D9 601A            124     JZ STORE35
+01DB 5011            125     JNC STORE25
+01DD 4016            126     JC STORE35
+01DF 22              127     RET
+                     128     
+01E0                 129     STORE5:
+01E0 7610            130     MOV @R0 , #10H
+01E2 19              131     DEC R1
+01E3 18              132     DEC R0
+01E4 DADB            133     DJNZ R2 , COMPARE
+01E6 22              134     RET
+                     135     
+01E7                 136     STORE15:
+01E7 7620            137     MOV @R0 , #20H
+01E9 19              138     DEC R1
+01EA 18              139     DEC R0
+01EB DAD4            140     DJNZ R2 , COMPARE
+01ED 22              141     RET
+                     142     
+01EE                 143     STORE25:
+01EE 7640            144     MOV @R0 , #40H
+01F0 19              145     DEC R1
+01F1 18              146     DEC R0
+01F2 DACD            147     DJNZ R2 , COMPARE
+01F4 22              148     RET
+                     149             
+01F5                 150     STORE35:
+01F5 7680            151     MOV @R0 , #80H
+01F7 19              152     DEC R1
+01F8 18              153     DEC R0
+01F9 DAC6            154     DJNZ R2 , COMPARE
+01FB 22              155     RET
+                     156     
+01FC                 157     LED_DISP:
+01FC 857090          158     MOV P1,70H
+01FF 313B            159     ACALL DELAY5
+0201 857190          160     MOV P1,71H
+0204 313B            161     ACALL DELAY5
+0206 857290          162     MOV P1,72H
+0209 313B            163     ACALL DELAY5
+020B 857390          164     MOV P1,73H
+020E 313B            165     ACALL DELAY5
+                     166     
+0210 31FC            167     ACALL LED_DISP
+                     168     
+0212 22              169     RET
+                     170     
+0213                 171     delay_50ms:
+0213 C000            172     push 00h
+0215 78C8            173     mov r0, #0C8h
+0217 511E            174     h2: acall delay_250us
+0219 D8FC            175     djnz r0, h2
+021B D000            176     pop 00h
+021D 22              177     ret
+                     178     
+021E                 179     delay_250us:
+021E C000            180     push 00h
+0220 78F4            181     mov r0, #244
+0222 D8FE            182     h1: djnz r0, h1
+0224 D000            183     pop 00h
+0226 22              184     ret
+                     185     
+                     186     END
+A51 MACRO ASSEMBLER  LAB_4                                                                01/31/2023 14:12:23 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+COMPARE. . . . . .  C ADDR   01C1H   A   
+DELAY10. . . . . .  C ADDR   0130H   A   
+DELAY5 . . . . . .  C ADDR   013BH   A   
+DELAY_250US. . . .  C ADDR   021EH   A   
+DELAY_50MS . . . .  C ADDR   0213H   A   
+H1 . . . . . . . .  C ADDR   0222H   A   
+H2 . . . . . . . .  C ADDR   0217H   A   
+H3 . . . . . . . .  C ADDR   0134H   A   
+H4 . . . . . . . .  C ADDR   013FH   A   
+HERE . . . . . . .  C ADDR   0109H   A   
+LED_DISP . . . . .  C ADDR   01FCH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+QUANT_ENC. . . . .  C ADDR   01BBH   A   
+STORE15. . . . . .  C ADDR   01E7H   A   
+STORE25. . . . . .  C ADDR   01EEH   A   
+STORE35. . . . . .  C ADDR   01F5H   A   
+STORE5 . . . . . .  C ADDR   01E0H   A   
+TAKE_INP . . . . .  C ADDR   0146H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
