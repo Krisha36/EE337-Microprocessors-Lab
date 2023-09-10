@@ -1,0 +1,78 @@
+A51 MACRO ASSEMBLER  ADD_SUB                                                              01/16/2023 23:27:12 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\add_sub.obj
+ASSEMBLER INVOKED BY: E:\Keil_v5\C51\BIN\A51.EXE add_sub.ASM SET(SMALL) DEBUG PRINT(.\Listings\add_sub.lst) OBJECT(.\Obj
+                      ects\add_sub.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+0000                   2     ORG 0H
+0000 020100            3     LJMP MAIN
+0100                   4     ORG 100H
+0100                   5     MAIN:
+0100 7961              6     MOV R1, #61H
+0102 3130              7     ACALL MODADD
+0104 3146              8     ACALL MODSUB
+0106 80FE              9     HERE: SJMP HERE
+0130                  10     ORG 130H
+                      11     
+0130                  12     MODADD:
+                      13     
+0130 E570             14     MOV A, 70H
+0132 89F0             15     MOV B, R1
+0134 84               16     DIV AB
+0135 ABF0             17     MOV R3, B
+0137 E571             18     MOV A, 71H
+0139 89F0             19     MOV B, R1
+013B 84               20     DIV AB
+013C E5F0             21     MOV A, B
+013E 2B               22     ADD A, R3
+013F 89F0             23     MOV B, R1
+0141 84               24     DIV AB
+0142 85F072           25     MOV 72H, B
+0145 22               26     RET
+                      27     
+0146                  28     MODSUB:
+                      29     
+0146 E570             30     MOV A, 70H
+0148 89F0             31     MOV B, R1
+014A 84               32     DIV AB
+014B AAF0             33     MOV R2, B
+014D E571             34     MOV A, 71H
+014F 89F0             35     MOV B, R1
+0151 84               36     DIV AB
+0152 E5F0             37     MOV A, B
+0154 CA               38     XCH A, R2
+0155 9A               39     SUBB A, R2
+0156 F573             40     MOV     73H, A
+0158 4001             41     JC BORROWCASE
+015A 22               42     RET
+                      43     
+015B                  44     BORROWCASE:
+015B 29               45     ADD A, R1
+015C F573             46     MOV 73H, A
+015E 22               47     RET
+                      48     END
+A51 MACRO ASSEMBLER  ADD_SUB                                                              01/16/2023 23:27:12 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BORROWCASE . . . .  C ADDR   015BH   A   
+HERE . . . . . . .  C ADDR   0106H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+MODADD . . . . . .  C ADDR   0130H   A   
+MODSUB . . . . . .  C ADDR   0146H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

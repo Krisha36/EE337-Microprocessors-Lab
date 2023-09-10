@@ -1,0 +1,3 @@
+".\Objects\quantise_signal.obj" 
+TO ".\Objects\quantise_signal" 
+PRINT(".\Listings\quantise_signal.m51") RAMSIZE(256) 

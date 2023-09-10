@@ -1,0 +1,100 @@
+A51 MACRO ASSEMBLER  QUANTISE_SIGNAL                                                      01/24/2023 15:50:09 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\quantise_signal.obj
+ASSEMBLER INVOKED BY: E:\Keil_v5\C51\BIN\A51.EXE quantise_signal.ASM SET(SMALL) DEBUG PRINT(.\Listings\quantise_signal.l
+                      st) OBJECT(.\Objects\quantise_signal.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 100H
+0100                   4     MAIN:
+0100 3130              5     CALL QUANT
+0102 80FE              6     HERE: SJMP HERE
+0130                   7     ORG 130H
+                       8     
+0130                   9     QUANT:
+                      10     
+                      11     
+0130 7877             12     MOV R0 , #77H
+0132 7967             13     MOV R1 , #67H
+0134 7A08             14     MOV R2 , #8H
+                      15     
+0136                  16     COMPARE:
+0136 87F0             17     MOV B , @R1
+0138 740A             18     MOV A , #0AH
+013A 95F0             19     SUBB A , B
+013C 601E             20     JZ STORE15
+013E 5015             21     JNC STORE5
+0140 C3               22     CLR C
+0141 7414             23     MOV A , #14H
+0143 95F0             24     SUBB A , B
+0145 601C             25     JZ STORE25
+0147 5013             26     JNC STORE15
+0149 C3               27     CLR C
+014A 741E             28     MOV A , #1EH
+014C 95F0             29     SUBB A , B
+014E 601A             30     JZ STORE35
+0150 5011             31     JNC STORE25
+0152 4016             32     JC STORE35
+0154 22               33     RET
+                      34     
+0155                  35     STORE5:
+0155 7605             36     MOV @R0 , #05H
+0157 19               37     DEC R1
+0158 18               38     DEC R0
+0159 DADB             39     DJNZ R2 , COMPARE
+015B 22               40     RET
+                      41     
+015C                  42     STORE15:
+015C 760F             43     MOV @R0 , #0FH
+015E 19               44     DEC R1
+015F 18               45     DEC R0
+0160 DAD4             46     DJNZ R2 , COMPARE
+0162 22               47     RET
+                      48     
+0163                  49     STORE25:
+0163 7619             50     MOV @R0 , #19H
+0165 19               51     DEC R1
+0166 18               52     DEC R0
+0167 DACD             53     DJNZ R2 , COMPARE
+0169 22               54     RET
+                      55             
+016A                  56     STORE35:
+016A 7623             57     MOV @R0 , #23H
+A51 MACRO ASSEMBLER  QUANTISE_SIGNAL                                                      01/24/2023 15:50:09 PAGE     2
+
+016C 19               58     DEC R1
+016D 18               59     DEC R0
+016E DAC6             60     DJNZ R2 , COMPARE
+0170 22               61     RET
+                      62     
+                      63     
+                      64     
+                      65     END
+A51 MACRO ASSEMBLER  QUANTISE_SIGNAL                                                      01/24/2023 15:50:09 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+COMPARE. . . . . .  C ADDR   0136H   A   
+HERE . . . . . . .  C ADDR   0102H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+QUANT. . . . . . .  C ADDR   0130H   A   
+STORE15. . . . . .  C ADDR   015CH   A   
+STORE25. . . . . .  C ADDR   0163H   A   
+STORE35. . . . . .  C ADDR   016AH   A   
+STORE5 . . . . . .  C ADDR   0155H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

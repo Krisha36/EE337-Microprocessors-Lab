@@ -1,0 +1,67 @@
+A51 MACRO ASSEMBLER  MOVING_AVG                                                           01/24/2023 16:03:05 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\moving_avg.obj
+ASSEMBLER INVOKED BY: E:\Keil_v5\C51\BIN\A51.EXE moving_avg.ASM SET(SMALL) DEBUG PRINT(.\Listings\moving_avg.lst) OBJECT
+                      (.\Objects\moving_avg.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 100H
+0100                   4     MAIN:
+0100 3130              5     CALL FILT
+0102 80FE              6     HERE: SJMP HERE
+0130                   7     ORG 130H
+                       8     
+0130                   9     FILT:
+                      10     
+                      11     
+0130 7A08             12     MOV R2 , #8H
+0132 7867             13     MOV R0 , #67H
+0134 7977             14     MOV R1 , #77H
+0136 755F00           15     MOV 5FH, #00H
+0139 755E00           16     MOV 5EH, #00H
+013C 755D00           17     MOV 5DH, #00H
+                      18     
+013F                  19     AVG:
+                      20     
+013F E6               21     MOV A , @R0
+0140 18               22     DEC R0
+0141 26               23     ADD A , @R0
+0142 18               24     DEC R0
+0143 26               25     ADD A , @R0
+0144 18               26     DEC R0
+0145 26               27     ADD A , @R0
+0146 75F004           28     MOV B , #4H
+0149 84               29     DIV AB
+014A F7               30     MOV @R1 , A
+014B 19               31     DEC R1
+014C 08               32     INC R0
+014D 08               33     INC R0
+014E DAEF             34     DJNZ R2 , AVG
+                      35     
+                      36     
+0150 22               37     RET
+                      38     END
+A51 MACRO ASSEMBLER  MOVING_AVG                                                           01/24/2023 16:03:05 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AVG. . . . . . . .  C ADDR   013FH   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+FILT . . . . . . .  C ADDR   0130H   A   
+HERE . . . . . . .  C ADDR   0102H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

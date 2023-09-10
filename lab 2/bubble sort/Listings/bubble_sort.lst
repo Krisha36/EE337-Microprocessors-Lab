@@ -1,0 +1,78 @@
+A51 MACRO ASSEMBLER  BUBBLE_SORT                                                          01/16/2023 20:45:29 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\bubble_sort.obj
+ASSEMBLER INVOKED BY: E:\Keil_v5\C51\BIN\A51.EXE bubble_sort.ASM SET(SMALL) DEBUG PRINT(.\Listings\bubble_sort.lst) OBJE
+                      CT(.\Objects\bubble_sort.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+0000                   2     ORG 0H
+0000 020100            3     LJMP MAIN
+0100                   4     ORG 100H
+0100                   5     MAIN:
+0100 3130              6     ACALL SORT
+0102 80FE              7     HERE: SJMP HERE
+0130                   8     ORG 130H
+                       9     
+                      10     
+0130                  11     SORT:
+                      12     
+0130 7807             13     MOV R0, #7H
+                      14     
+0132                  15     OUTERLOOP:
+0132 8830             16     MOV 30H, R0
+0134 7960             17     MOV R1, #60H
+0136                  18     INNERLOOP: 
+0136 87F0             19     MOV B, @R1
+0138 09               20     INC R1
+0139 E7               21     MOV A, @R1
+013A 95F0             22     SUBB A, B
+013C 500A             23     JNC SKIPifasc
+013E B3               24     CPL C
+013F E5F0             25     MOV A, B
+0141 87F0             26     MOV B, @R1
+0143 19               27     DEC R1
+0144 A7F0             28     MOV @R1, B
+0146 09               29     INC R1
+0147 F7               30     MOV @R1, A
+                      31     
+0148                  32     SKIPifasc:
+0148 D530EB           33     DJNZ 30H, INNERLOOP
+014B D8E5             34     DJNZ R0, OUTERLOOP
+                      35     
+014D 856070           36     MOV 70H, 60H
+0150 856171           37     MOV 71H, 61H
+0153 856272           38     MOV 72H, 62H
+0156 856373           39     MOV 73H, 63H
+0159 856474           40     MOV 74H, 64H
+015C 856575           41     MOV 75H, 65H
+015F 856676           42     MOV 76H, 66H
+0162 856777           43     MOV 77H, 67H
+                      44     
+                      45     
+0165 22               46     RET
+                      47     END
+A51 MACRO ASSEMBLER  BUBBLE_SORT                                                          01/16/2023 20:45:29 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+HERE . . . . . . .  C ADDR   0102H   A   
+INNERLOOP. . . . .  C ADDR   0136H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+OUTERLOOP. . . . .  C ADDR   0132H   A   
+SKIPIFASC. . . . .  C ADDR   0148H   A   
+SORT . . . . . . .  C ADDR   0130H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

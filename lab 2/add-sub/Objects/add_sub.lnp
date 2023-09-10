@@ -1,0 +1,3 @@
+".\Objects\add_sub.obj" 
+TO ".\Objects\add_sub" 
+PRINT(".\Listings\add_sub.m51") RAMSIZE(256) 
